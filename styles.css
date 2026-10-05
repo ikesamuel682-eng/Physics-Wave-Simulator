@@ -1,0 +1,1805 @@
+ 
+/* ==========================================================================
+   WAVE LAB — GLOBAL RESET & LAYOUT
+   ========================================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+html {
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at 20% 10%,
+            rgba(14, 116, 144, 0.18),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 80% 20%,
+            rgba(30, 64, 175, 0.15),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #020617,
+            #07111f 50%,
+            #020617
+        );
+
+    color: #e2e8f0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    overflow-x: hidden;
+}
+
+button,
+input,
+select {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:focus-visible,
+select:focus-visible,
+input:focus-visible {
+    outline: 2px solid #38bdf8;
+    outline-offset: 3px;
+}
+
+
+/* ==========================================================================
+   HEADER
+   ========================================================================== */
+
+header {
+    text-align: center;
+    padding: 30px 20px 15px;
+}
+
+header h1 {
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-weight: 800;
+    letter-spacing: 2px;
+
+    color: #f8fafc;
+
+    text-shadow:
+        0 0 15px rgba(56, 189, 248, 0.35);
+}
+
+header p {
+    color: #94a3b8;
+    margin-top: 6px;
+    font-size: 1.05rem;
+    letter-spacing: 1px;
+}
+
+
+/* ==========================================================================
+   MODE NAVIGATION
+   ========================================================================== */
+
+.mode-selector {
+    width: 100%;
+    max-width: 1200px;
+
+    margin: 15px auto 20px;
+    padding: 0 15px;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+}
+
+.mode-selector button {
+    padding: 10px 16px;
+
+    border: 1px solid #334155;
+    border-radius: 10px;
+
+    background: rgba(15, 23, 42, 0.9);
+
+    color: #cbd5e1;
+
+    font-size: 0.95rem;
+
+    transition:
+        transform 0.18s ease,
+        background 0.18s ease,
+        border-color 0.18s ease,
+        box-shadow 0.18s ease;
+}
+
+.mode-selector button:hover {
+    background: #172554;
+    border-color: #38bdf8;
+
+    color: white;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 5px 20px rgba(56, 189, 248, 0.18);
+}
+
+.mode-selector button.active {
+    background: linear-gradient(
+        135deg,
+        #0369a1,
+        #0e7490
+    );
+
+    color: #ffffff;
+
+    border-color: #38bdf8;
+
+    transform: scale(1.04);
+
+    box-shadow:
+        0 0 20px rgba(56, 189, 248, 0.3);
+}
+
+
+/* ==========================================================================
+   CANVAS & SIMULATION WORKSPACE
+   ========================================================================== */
+
+.canvas-container {
+    position: relative;
+
+    width: 90%;
+    max-width: 1400px;
+
+    height: 560px;
+
+    margin: 0 auto 25px;
+
+    overflow: hidden;
+
+    padding: 15px;
+
+    border-radius: 18px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(14, 116, 144, 0.08),
+            transparent 60%
+        ),
+        #020617;
+
+    border: 1px solid #1e3a5f;
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.4),
+        inset 0 0 40px rgba(56, 189, 248, 0.04);
+}
+
+canvas {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    border-radius: 10px;
+
+    background: #001f3f;
+}
+
+#waveCanvas {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    border-radius: 10px;
+}
+
+#canvas3D {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: none;
+
+    border-radius: 10px;
+
+    background: #001f3f;
+}
+
+
+/* ==========================================================================
+   EQUATION DISPLAY
+   ========================================================================== */
+
+.equation-display {
+    position: absolute;
+
+    z-index: 10;
+
+    top: 25px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    padding: 12px 22px;
+
+    border-radius: 12px;
+
+    background: rgba(2, 6, 23, 0.82);
+
+    border: 1px solid rgba(56, 189, 248, 0.3);
+
+    backdrop-filter: blur(10px);
+
+    font-family:
+        "Cambria Math",
+        "Times New Roman",
+        serif;
+
+    font-size: 1.35rem;
+
+    letter-spacing: 0.5px;
+
+    white-space: nowrap;
+
+    box-shadow:
+        0 5px 25px rgba(0, 0, 0, 0.3);
+}
+
+.eq-term {
+    cursor: pointer;
+
+    padding: 2px 5px;
+
+    border-radius: 5px;
+
+    transition:
+        background 0.2s ease,
+        text-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+.eq-term:hover {
+    background: rgba(255, 255, 255, 0.12);
+
+    text-shadow:
+        0 0 12px currentColor;
+}
+
+.eq-term.pulse {
+    animation: termPulse 0.6s ease;
+}
+
+@keyframes termPulse {
+    0%,
+    100% {
+        background: transparent;
+    }
+
+    50% {
+        background: rgba(255, 255, 255, 0.4);
+    }
+}
+
+
+/* ==========================================================================
+   MAIN MASCOT
+   ========================================================================== */
+
+.mascot {
+    position: absolute;
+
+    z-index: 15;
+
+    right: 20px;
+    bottom: 20px;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    gap: 10px;
+
+    max-width: 360px;
+}
+
+.mascot-avatar {
+    width: 54px;
+    height: 54px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: #0f172a;
+
+    border: 2px solid #38bdf8;
+
+    font-size: 28px;
+
+    box-shadow:
+        0 0 20px rgba(56, 189, 248, 0.25);
+
+    animation:
+        mascotFloat 3s ease-in-out infinite;
+}
+
+@keyframes mascotFloat {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
+.mascot-bubble {
+    padding: 11px 14px;
+
+    border-radius: 14px 14px 3px 14px;
+
+    background: rgba(15, 23, 42, 0.94);
+
+    border: 1px solid #334155;
+
+    color: #dbeafe;
+
+    font-size: 0.9rem;
+
+    line-height: 1.4;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+
+/* ==========================================================================
+   EM WAVE LEGEND
+   ========================================================================== */
+
+.em-legend {
+    position: absolute;
+
+    z-index: 10;
+
+    left: 20px;
+    bottom: 20px;
+
+    padding: 10px 14px;
+
+    border-radius: 10px;
+
+    background: rgba(2, 6, 23, 0.85);
+
+    border: 1px solid #334155;
+
+    font-size: 0.85rem;
+
+    display: none;
+}
+
+
+/* ==========================================================================
+   MAIN CONTROLS DASHBOARD
+   ========================================================================== */
+
+.controls {
+    width: 90%;
+    max-width: 1100px;
+
+    margin: 0 auto 50px;
+
+    padding: 25px;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(15, 23, 42, 0.96),
+            rgba(8, 20, 35, 0.96)
+        );
+
+    border: 1px solid #1e3a5f;
+
+    color: #f0f4f8;
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.3);
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 1.25rem;
+}
+
+.controls h2 {
+    font-size: 1.5rem;
+
+    color: #38bdf8;
+}
+
+.controls label {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    align-items: center;
+
+    gap: 0.5rem;
+
+    font-weight: 600;
+
+    color: #e2e8f0;
+
+    font-size: 1rem;
+}
+
+.controls label span[id$="Value"] {
+    background: #0f172a;
+
+    border: 1px solid #475569;
+
+    border-radius: 6px;
+
+    padding: 0.15rem 0.5rem;
+
+    font-family: monospace;
+
+    color: #38bdf8;
+
+    font-size: 0.9rem;
+
+    margin-left: auto;
+}
+
+
+/* ==========================================================================
+   RANGE SLIDERS
+   ========================================================================== */
+
+.controls input[type="range"] {
+    width: 100%;
+
+    height: 8px;
+
+    border-radius: 4px;
+
+    background: #334155;
+
+    outline: none;
+
+    cursor: pointer;
+
+    margin-top: 0.3rem;
+
+    appearance: none;
+}
+
+.controls input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+
+    width: 20px;
+    height: 20px;
+
+    border-radius: 50%;
+
+    background: #f8fafc;
+
+    border: 3px solid #38bdf8;
+
+    box-shadow:
+        0 0 10px rgba(56, 189, 248, 0.5);
+
+    cursor: pointer;
+
+    transition:
+        transform 0.1s ease,
+        background-color 0.2s ease;
+}
+
+.controls input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+
+    background: #38bdf8;
+}
+
+.controls input[type="range"]::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+
+    border-radius: 50%;
+
+    background: #38bdf8;
+
+    border: 2px solid #e0f2fe;
+
+    cursor: pointer;
+}
+
+input[type="range"].slider-pulse {
+    animation: sliderPulse 0.6s ease;
+}
+
+@keyframes sliderPulse {
+    0%,
+    100% {
+        box-shadow: none;
+    }
+
+    50% {
+        box-shadow:
+            0 0 12px 4px rgba(0, 224, 255, 0.6);
+    }
+}
+
+
+/* ==========================================================================
+   PLAYBACK & GENERAL BUTTONS
+   ========================================================================== */
+
+.playback-buttons,
+.btn-group {
+    display: flex;
+
+    gap: 0.5rem;
+
+    flex-wrap: wrap;
+}
+
+.playback-buttons button,
+.btn-group button,
+.end-btn,
+.source-btn,
+.modulation-btn,
+#playCarBtn,
+#playRadioBtn,
+#checkChallengeBtn {
+    background: #1e293b;
+
+    border: 1px solid #475569;
+
+    color: #f8fafc;
+
+    padding: 0.55rem 1rem;
+
+    border-radius: 8px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        all 0.18s ease;
+
+    box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.playback-buttons button:hover,
+.btn-group button:hover,
+.end-btn:hover,
+.source-btn:hover,
+.modulation-btn:hover,
+#playCarBtn:hover,
+#playRadioBtn:hover,
+#checkChallengeBtn:hover {
+    background: #38bdf8;
+
+    color: #0f172a;
+
+    border-color: #38bdf8;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 4px 12px rgba(56, 189, 248, 0.3);
+}
+
+.playback-buttons button:active,
+.btn-group button:active {
+    transform: translateY(1px);
+}
+
+.end-btn.active,
+.source-btn.active,
+.modulation-btn.active {
+    background: #0284c7 !important;
+
+    color: #ffffff !important;
+
+    border-color: #38bdf8 !important;
+
+    box-shadow:
+        inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+#polarizationBtn {
+    display: none;
+}
+
+
+/* ==========================================================================
+   SPECIALIZED CONTROL SECTIONS
+   ========================================================================== */
+
+.string-controls,
+.sound-controls,
+.radio-controls,
+.fourier-controls {
+    background:
+        rgba(15, 23, 42, 0.6);
+
+    border: 1px solid #1e293b;
+
+    padding: 15px;
+
+    border-radius: 12px;
+}
+
+.group-label {
+    color: #94a3b8;
+
+    font-size: 0.9rem;
+
+    font-weight: 600;
+
+    margin-right: 6px;
+}
+
+.doppler-readout {
+    margin-top: 12px;
+
+    font-size: 1.1rem;
+
+    background: #0f172a;
+
+    border: 1px solid #334155;
+
+    padding: 10px 12px;
+
+    border-radius: 8px;
+
+    text-align: center;
+
+    color: #38bdf8;
+
+    font-family: monospace;
+}
+
+
+/* ==========================================================================
+   FOURIER CONTROLS
+   ========================================================================== */
+
+.harmonic-row {
+    display: grid;
+
+    grid-template-columns:
+        minmax(220px, 1fr)
+        minmax(150px, 2fr);
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 12px;
+
+    padding: 10px;
+
+    border-radius: 9px;
+
+    background:
+        rgba(15, 23, 42, 0.6);
+}
+
+.harmonic-row label {
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    min-width: 170px;
+
+    font-size: 0.95rem;
+}
+
+.harmonic-slider {
+    width: 100%;
+}
+
+
+/* ==========================================================================
+   INFORMATION TOOLTIPS
+   ========================================================================== */
+
+.info-icon {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 19px;
+    height: 19px;
+
+    cursor: help;
+
+    color: #64748b;
+
+    margin-left: 4px;
+
+    font-size: 0.9rem;
+
+    position: relative;
+
+    transition:
+        color 0.2s ease;
+}
+
+.info-icon:hover {
+    color: #38bdf8;
+}
+
+.info-icon::after {
+    content: attr(data-tooltip);
+
+    position: absolute;
+
+    left: 50%;
+
+    bottom: calc(100% + 10px);
+
+    transform: translateX(-50%);
+
+    width: 250px;
+
+    padding: 10px 12px;
+
+    border-radius: 9px;
+
+    background: #020617;
+
+    border: 1px solid #334155;
+
+    color: #cbd5e1;
+
+    font-size: 0.78rem;
+
+    line-height: 1.4;
+
+    font-weight: normal;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.2s ease;
+
+    z-index: 100;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.info-icon:hover::after {
+    opacity: 1;
+}
+
+
+/* ==========================================================================
+   CHALLENGE BOX
+   ========================================================================== */
+
+.challenge-box {
+    margin-top: 5px;
+
+    padding: 18px;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(113, 63, 18, 0.25),
+            rgba(15, 23, 42, 0.7)
+        );
+
+    border: 1px dashed #f59e0b;
+
+    color: #fbbf24;
+
+    line-height: 1.5;
+}
+
+.challenge-box strong {
+    color: #facc15;
+}
+
+#challengeText {
+    color: #cbd5e1;
+
+    margin-left: 5px;
+}
+
+#checkChallengeBtn {
+    margin-left: 10px;
+}
+
+#challengeFeedback {
+    margin-top: 8px;
+
+    font-weight: bold;
+}
+
+
+/* ==========================================================================
+   EXPERIMENT PANEL
+   ========================================================================== */
+
+.experiment-panel {
+    background:
+        linear-gradient(
+            145deg,
+            #1e293b,
+            #0f172a
+        );
+
+    border: 2px solid #334155;
+
+    border-radius: 14px;
+
+    padding: 1.25rem;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 4px 12px rgba(0, 0, 0, 0.25);
+
+    transition:
+        border-color 0.3s ease;
+}
+
+.experiment-panel:hover {
+    border-color: #38bdf8;
+}
+
+.experiment-panel h2 {
+    margin: 0 0 0.5rem 0;
+
+    font-size: 1.25rem;
+
+    color: #38bdf8;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 0.5rem;
+}
+
+.experiment-panel p {
+    margin: 0 0 1rem 0;
+
+    font-size: 0.9rem;
+
+    color: #94a3b8;
+}
+
+.experiment-controls {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(200px, 1fr)
+        );
+
+    gap: 1rem;
+
+    margin-bottom: 1rem;
+}
+
+.experiment-controls label {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 0.4rem;
+
+    font-size: 0.85rem;
+
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.05em;
+
+    color: #cbd5e1;
+}
+
+.experiment-controls select {
+    appearance: none;
+
+    background-color: #0f172a;
+
+    background-image:
+        url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%22//www.w3.org/2000/svg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2338bdf8%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22/%3E%3C/svg%3E");
+
+    background-repeat: no-repeat;
+
+    background-position:
+        right 0.8rem center;
+
+    background-size: 0.65rem auto;
+
+    border: 2px solid #475569;
+
+    border-radius: 8px;
+
+    color: #f8fafc;
+
+    padding:
+        0.6rem
+        2rem
+        0.6rem
+        0.8rem;
+
+    font-size: 0.95rem;
+
+    font-weight: 500;
+
+    cursor: pointer;
+
+    outline: none;
+
+    transition:
+        all 0.2s ease;
+}
+
+.experiment-controls select:hover {
+    border-color: #38bdf8;
+
+    background-color: #1e293b;
+}
+
+.experiment-controls select:focus {
+    border-color: #38bdf8;
+
+    box-shadow:
+        0 0 0 3px rgba(56, 189, 248, 0.25);
+}
+
+#experimentMessage {
+    background: #090d16;
+
+    border-left: 4px solid #38bdf8;
+
+    border-radius: 6px;
+
+    padding: 0.8rem 1rem;
+
+    font-size: 0.9rem;
+
+    color: #e2e8f0;
+
+    line-height: 1.4;
+
+    min-height: 2.8rem;
+
+    display: flex;
+
+    align-items: center;
+}
+
+
+/* ==========================================================================
+   ==========================================================================
+
+   DR. WAVE INTRO OVERLAY
+
+   ========================================================================== 
+   ========================================================================== */
+
+.phet-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 9999;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(14, 116, 144, 0.18),
+            transparent 45%
+        ),
+        rgba(2, 6, 23, 0.94);
+
+    backdrop-filter: blur(8px);
+
+    animation:
+        overlayAppear 0.45s ease;
+}
+
+@keyframes overlayAppear {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* ==========================================================================
+   TUTOR CARD
+   ========================================================================== */
+
+.tutor-card {
+    position: relative;
+
+    width: min(720px, 100%);
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    padding: 35px;
+
+    border-radius: 24px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #0f172a,
+            #07111f
+        );
+
+    border: 1px solid rgba(56, 189, 248, 0.35);
+
+    box-shadow:
+        0 30px 100px rgba(0, 0, 0, 0.65),
+        0 0 50px rgba(56, 189, 248, 0.08);
+
+    text-align: center;
+
+    animation:
+        tutorCardEnter
+        0.55s
+        cubic-bezier(
+            0.2,
+            0.8,
+            0.2,
+            1
+        );
+}
+
+@keyframes tutorCardEnter {
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(30px)
+            scale(0.94);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+/* ==========================================================================
+   DR. WAVE AVATAR
+   ========================================================================== */
+
+#avatarContainer {
+    width: 150px;
+    height: 150px;
+
+    margin: 0 auto 20px;
+
+    position: relative;
+}
+
+.teacher-svg {
+    width: 100%;
+    height: 100%;
+
+    overflow: visible;
+
+    filter:
+        drop-shadow(
+            0 0 15px rgba(56, 189, 248, 0.25)
+        );
+}
+
+
+/* Idle animation */
+
+.avatar-animated.idle {
+    animation:
+        doctorIdle
+        3.5s
+        ease-in-out
+        infinite;
+}
+
+
+/* Excited animation */
+
+.avatar-animated.excited {
+    animation:
+        doctorExcited
+        0.6s
+        ease-in-out
+        infinite alternate;
+}
+
+@keyframes doctorIdle {
+    0%,
+    100% {
+        transform:
+            translateY(0)
+            rotate(0deg);
+    }
+
+    50% {
+        transform:
+            translateY(-7px)
+            rotate(1deg);
+    }
+}
+
+@keyframes doctorExcited {
+    0% {
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+    100% {
+        transform:
+            translateY(-12px)
+            scale(1.05);
+    }
+}
+
+
+/* ==========================================================================
+   DR. WAVE SPARKLE
+   ========================================================================== */
+
+.sparkle {
+    transform-origin: center;
+
+    animation:
+        sparklePulse
+        1.8s
+        ease-in-out
+        infinite;
+}
+
+@keyframes sparklePulse {
+    0%,
+    100% {
+        opacity: 0.4;
+
+        transform: scale(0.8);
+    }
+
+    50% {
+        opacity: 1;
+
+        transform: scale(1.2);
+    }
+}
+
+
+/* ==========================================================================
+   DR. WAVE SPEECH BUBBLE
+   ========================================================================== */
+
+.speech-bubble {
+    position: relative;
+
+    max-width: 600px;
+
+    min-height: 70px;
+
+    margin: 0 auto 25px;
+
+    padding: 20px 24px;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #172554,
+            #0f172a
+        );
+
+    border: 1px solid rgba(56, 189, 248, 0.35);
+
+    color: #e0f2fe;
+
+    font-size: 1.05rem;
+
+    line-height: 1.6;
+
+    text-align: left;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.25);
+
+    animation:
+        speechAppear
+        0.4s
+        ease;
+}
+
+.speech-bubble::before {
+    content: "";
+
+    position: absolute;
+
+    top: -10px;
+
+    left: 50%;
+
+    width: 20px;
+    height: 20px;
+
+    transform:
+        translateX(-50%)
+        rotate(45deg);
+
+    background: #172554;
+
+    border-left:
+        1px solid
+        rgba(56, 189, 248, 0.35);
+
+    border-top:
+        1px solid
+        rgba(56, 189, 248, 0.35);
+}
+
+@keyframes speechAppear {
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+/* ==========================================================================
+   INTRO BUTTONS
+   ========================================================================== */
+
+.phet-btn {
+    border: none;
+
+    padding: 13px 24px;
+
+    border-radius: 11px;
+
+    font-weight: 700;
+
+    color: white;
+
+    transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        filter 0.18s ease;
+}
+
+.phet-btn:hover {
+    transform:
+        translateY(-2px);
+
+    filter:
+        brightness(1.08);
+}
+
+.phet-btn:active {
+    transform:
+        translateY(1px);
+}
+
+.phet-btn.primary {
+    background:
+        linear-gradient(
+            135deg,
+            #0284c7,
+            #0891b2
+        );
+
+    box-shadow:
+        0 7px 25px
+        rgba(14, 165, 233, 0.25);
+}
+
+#introNextBtn {
+    min-width: 150px;
+}
+
+
+/* ==========================================================================
+   QUIZ
+   ========================================================================== */
+
+#introQuiz {
+    margin-top: 10px;
+
+    text-align: left;
+}
+
+#introQuiz h3 {
+    text-align: center;
+
+    margin-bottom: 20px;
+
+    color: #f8fafc;
+
+    font-size: 1.5rem;
+}
+
+.quiz-question {
+    margin-bottom: 18px;
+
+    padding: 18px;
+
+    border-radius: 14px;
+
+    background:
+        rgba(2, 6, 23, 0.55);
+
+    border: 1px solid #1e293b;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.quiz-question p {
+    margin-bottom: 12px;
+
+    color: #e2e8f0;
+
+    line-height: 1.5;
+}
+
+.quiz-option {
+    width: 100%;
+
+    display: block;
+
+    margin-top: 8px;
+
+    padding: 11px 14px;
+
+    border-radius: 9px;
+
+    border: 1px solid #334155;
+
+    background: #0f172a;
+
+    color: #cbd5e1;
+
+    text-align: left;
+
+    transition:
+        all 0.18s ease;
+}
+
+.quiz-option:hover {
+    border-color: #38bdf8;
+
+    background: #172554;
+
+    color: white;
+
+    transform:
+        translateX(3px);
+}
+
+.quiz-option.correct {
+    background:
+        rgba(22, 163, 74, 0.18);
+
+    border-color:
+        #4ade80;
+
+    color:
+        #bbf7d0;
+}
+
+.quiz-option.incorrect {
+    background:
+        rgba(220, 38, 38, 0.16);
+
+    border-color:
+        #f87171;
+
+    color:
+        #fecaca;
+}
+
+.quiz-feedback {
+    min-height: 20px;
+
+    margin-top: 9px;
+
+    font-size: 0.9rem;
+
+    font-weight: 600;
+}
+
+
+/* ==========================================================================
+   QUIZ COMPLETION
+   ========================================================================== */
+
+.completion-box {
+    margin-top: 22px;
+
+    padding: 22px;
+
+    border-radius: 16px;
+
+    background:
+        radial-gradient(
+            circle at top,
+            rgba(14, 165, 233, 0.15),
+            transparent 60%
+        ),
+        rgba(2, 6, 23, 0.8);
+
+    border:
+        1px solid
+        rgba(56, 189, 248, 0.45);
+
+    text-align: center;
+
+    animation:
+        completionAppear
+        0.5s
+        cubic-bezier(
+            0.2,
+            0.8,
+            0.2,
+            1
+        );
+}
+
+.completion-box p {
+    margin-bottom: 15px;
+
+    color: #bae6fd;
+
+    font-size: 1rem;
+}
+
+@keyframes completionAppear {
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(15px)
+            scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+/* ==========================================================================
+   LAUNCH BUTTON
+   ========================================================================== */
+
+.phet-btn.launch-btn {
+    background:
+        linear-gradient(
+            135deg,
+            #0284c7,
+            #7c3aed
+        );
+
+    color: #ffffff;
+
+    font-size: 1rem;
+
+    padding: 15px 28px;
+
+    border-radius: 11px;
+
+    border: none;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 8px 30px
+        rgba(124, 58, 237, 0.25);
+
+    transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        filter 0.18s ease;
+}
+
+.phet-btn.launch-btn:hover {
+    transform:
+        translateY(-2px);
+
+    filter:
+        brightness(1.08);
+
+    box-shadow:
+        0 10px 35px
+        rgba(14, 165, 233, 0.3);
+}
+
+.phet-btn.launch-btn:active {
+    transform:
+        translateY(1px);
+}
+
+
+/* ==========================================================================
+   SCROLLBAR
+   ========================================================================== */
+
+::-webkit-scrollbar {
+    width: 9px;
+}
+
+::-webkit-scrollbar-track {
+    background: #020617;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #334155;
+
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #0e7490;
+}
+
+
+/* ==========================================================================
+   RESPONSIVE — TABLET
+   ========================================================================== */
+
+@media (max-width: 800px) {
+
+    .canvas-container {
+        height: 450px;
+    }
+
+    .equation-display {
+        font-size: 1rem;
+
+        max-width:
+            calc(100% - 30px);
+
+        overflow-x: auto;
+    }
+
+    .controls {
+        padding: 18px;
+    }
+
+    .tutor-card {
+        padding: 25px 18px;
+    }
+
+    #avatarContainer {
+        width: 125px;
+        height: 125px;
+    }
+
+    .speech-bubble {
+        font-size: 0.95rem;
+
+        padding: 16px;
+    }
+
+    .experiment-controls {
+        grid-template-columns: 1fr;
+    }
+
+    .harmonic-row {
+        grid-template-columns: 1fr;
+    }
+
+    .mascot {
+        right: 10px;
+        bottom: 10px;
+
+        max-width: 280px;
+    }
+
+    .mascot-bubble {
+        font-size: 0.78rem;
+    }
+}
+
+
+/* ==========================================================================
+   RESPONSIVE — PHONE
+   ========================================================================== */
+
+@media (max-width: 550px) {
+
+    header {
+        padding-top: 20px;
+    }
+
+    header h1 {
+        font-size: 2.2rem;
+    }
+
+    .mode-selector {
+        gap: 5px;
+    }
+
+    .mode-selector button {
+        padding: 8px 10px;
+
+        font-size: 0.8rem;
+    }
+
+    .canvas-container {
+        width:
+            calc(100% - 20px);
+
+        height: 400px;
+
+        border-radius: 12px;
+    }
+
+    .controls {
+        width:
+            calc(100% - 20px);
+
+        border-radius: 12px;
+
+        padding: 16px;
+    }
+
+    .tutor-card {
+        max-height: 94vh;
+
+        border-radius: 18px;
+
+        padding: 20px 14px;
+    }
+
+    #avatarContainer {
+        width: 105px;
+        height: 105px;
+    }
+
+    .speech-bubble {
+        font-size: 0.88rem;
+
+        line-height: 1.5;
+    }
+
+    .mascot {
+        display: none;
+    }
+
+    .em-legend {
+        font-size: 0.7rem;
+
+        left: 10px;
+        bottom: 10px;
+    }
+
+    .harmonic-row {
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    #checkChallengeBtn {
+        margin-left: 0;
+
+        margin-top: 10px;
+    }
+}
+
+
+/* ==========================================================================
+   REDUCED MOTION
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+
+        animation-iteration-count: 1 !important;
+
+        scroll-behavior: auto !important;
+
+        transition-duration: 0.01ms !important;
+    }
+}
+ 
