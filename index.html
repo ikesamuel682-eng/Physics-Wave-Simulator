@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Wave Lab</title>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- =========================================================
+       INTRO & ANIMATED DR. WAVE TUTOR
+       ========================================================= -->
+
+  <div id="introOverlay" class="phet-overlay">
+
+    <div class="tutor-card">
+
+      <!-- =====================================================
+           ANIMATED DR. WAVE
+           ===================================================== -->
+
+      <div id="avatarContainer" class="avatar-animated idle">
+
+        <svg
+          id="drWaveSvg"
+          viewBox="0 0 100 100"
+          class="teacher-svg"
+          aria-label="Dr. Wave"
+        >
+
+          <!-- Head -->
+          <circle
+            cx="50"
+            cy="50"
+            r="45"
+            fill="#1e293b"
+            stroke="#38bdf8"
+            stroke-width="3"
+          />
+
+          <!-- Left Glass Lens -->
+          <circle
+            cx="35"
+            cy="45"
+            r="10"
+            fill="none"
+            stroke="#38bdf8"
+            stroke-width="2.5"
+          />
+
+          <!-- Right Glass Lens -->
+          <circle
+            cx="65"
+            cy="45"
+            r="10"
+            fill="none"
+            stroke="#38bdf8"
+            stroke-width="2.5"
+          />
+
+          <!-- Glasses Bridge -->
+          <line
+            x1="45"
+            y1="45"
+            x2="55"
+            y2="45"
+            stroke="#38bdf8"
+            stroke-width="2.5"
+          />
+
+          <!-- Smile -->
+          <path
+            id="teacherMouth"
+            d="M 35 65 Q 50 78 65 65"
+            fill="none"
+            stroke="#38bdf8"
+            stroke-width="3"
+            stroke-linecap="round"
+          />
+
+          <!-- Sparkle -->
+          <path
+            class="sparkle"
+            d="M 15 25 L 20 20 L 25 25 L 20 30 Z"
+            fill="#facc15"
+          />
+
+        </svg>
+
+      </div>
+
+
+      <!-- =====================================================
+           TUTOR SPEECH BUBBLE
+           ===================================================== -->
+
+      <div
+        class="speech-bubble"
+        id="introSlideText"
+      >
+        Hi! I'm Dr. Wave, and I'll be your guide today.
+        Waves are everywhere — in water, sound, light, and even
+        radio signals. Let's learn the basics before you start
+        experimenting!
+      </div>
+
+
+      <!-- =====================================================
+           INTRODUCTION SLIDES
+           ===================================================== -->
+
+      <div id="introSlides">
+
+        <button
+          id="introNextBtn"
+          class="phet-btn primary"
+          type="button"
+        >
+          Next Step →
+        </button>
+
+      </div>
+
+
+      <!-- =====================================================
+           QUICK CHECK QUIZ
+           ===================================================== -->
+
+      <div
+        id="introQuiz"
+        style="display: none;"
+      >
+
+        <h3>Quick Check</h3>
+
+
+        <!-- ===================================================
+             QUESTION 1
+             =================================================== -->
+
+        <div
+          class="quiz-question"
+          data-answer="A"
+        >
+
+          <p>
+            1. What property measures how tall a wave is?
+          </p>
+
+          <button
+            type="button"
+            class="quiz-option"
+            data-choice="A"
+          >
+            Amplitude
+          </button>
+
+          <button
+            type="button"
+            class="quiz-option"
+            data-choice="B"
+          >
+            Wavelength
+          </button>
+
+          <button
+            type="button"
+            class="quiz-option"
+            data-choice="C"
+          >
+            Frequency
+          </button>
+
+          <div class="quiz-feedback"></div>
+
+        </div>
+
+
+        <!-- ===================================================
+             QUESTION 2
+             =================================================== -->
+
+        <div
+          class="quiz-question"
+          data-answer="B"
+        >
+
+          <p>
+            2. If frequency increases while wave speed stays
+            constant, what happens to wavelength?
+          </p>
+
+          <button
+            type="button"
+            class="quiz-option"
+            data-choice="A"
+          >
+            It increases
+          </button>
+
+          <button
+            type="button"
+            class="quiz-option"
+            data-choice="B"
+          >
+            It decreases
+          </button>
+
+          <button
+            type="button"
+            class="quiz-option"
+            data-choice="C"
+          >
+            It stays the same
+          </button>
+
+          <div class="quiz-feedback"></div>
+
+        </div>
+
+
+        <!-- ===================================================
+             QUESTION 3
+             =================================================== -->
+
+        <div
+          class="quiz-question"
+          data-answer="A"
+        >
+
+          <p>
+            3. High amplitude means the wave carries...
+          </p>
+
+          <button
+            type="button"
+            class="quiz-option"
+            data-choice="A"
+          >
+            More energy
+          </button>
+
+          <button
+            type="button"
+            class="quiz-option"
+            data-choice="B"
+          >
+            Less energy
+          </button>
+
+          <button
+            type="button"
+            class="quiz-option"
+            data-choice="C"
+          >
+            No energy
+          </button>
+
+          <div class="quiz-feedback"></div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       SEPARATE LAB LAUNCH SCREEN
+
+       IMPORTANT:
+       This is OUTSIDE #introOverlay.
+
+       The quiz can therefore completely disappear before
+       this screen appears.
+       ========================================================= -->
+
+  <div
+    id="quizCompleteCard"
+    class="phet-overlay"
+    style="display: none;"
+  >
+
+    <div class="tutor-card completion-box">
+
+      <!-- Wave mascot -->
+      <div class="launch-avatar">
+        🌊
+      </div>
+
+      <h2>
+        🎉 You're Ready!
+      </h2>
+
+      <p>
+        Great work! You've learned the basics of waves.
+      </p>
+
+      <p>
+        Now it's time to experiment with the Wave Lab.
+      </p>
+
+      <p>
+        Change variables, observe the wave, and discover
+        the physics for yourself!
+      </p>
+
+      <button
+        id="startExploringBtn"
+        class="phet-btn launch-btn"
+        type="button"
+      >
+        🚀 Let's Go to the Lab!
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       MAIN HEADER
+       ========================================================= -->
+
+  <header>
+
+    <h1>Wave Lab</h1>
+
+    <p>
+      Interactive Wave Simulator
+    </p>
+
+  </header>
+
+
+  <!-- =========================================================
+       SIMULATION MODE SELECTOR
+       ========================================================= -->
+
+  <nav class="mode-selector">
+
+    <button
+      type="button"
+      data-mode="1d"
+    >
+      1D Wave
+    </button>
+
+    <button
+      type="button"
+      data-mode="2d"
+    >
+      2D Ripples
+    </button>
+
+    <button
+      type="button"
+      data-mode="3d"
+    >
+      3D Waves
+    </button>
+
+    <button
+      type="button"
+      data-mode="sound"
+    >
+      Sound Waves
+    </button>
+
+    <button
+      type="button"
+      data-mode="em"
+    >
+      EM Waves
+    </button>
+
+    <button
+      type="button"
+      data-mode="radio"
+    >
+      Radio Waves
+    </button>
+
+    <button
+      type="button"
+      data-mode="fourier"
+    >
+      Fourier Waves
+    </button>
+
+  </nav>
+
+
+  <!-- =========================================================
+       WAVE SIMULATION CANVAS
+       ========================================================= -->
+
+  <section class="canvas-container">
+
+    <!-- Equation Display -->
+
+    <div
+      class="equation-display"
+      id="equationDisplay"
+    >
+
+      <span
+        class="eq-term"
+        data-term="amplitude"
+        style="color:#00e0ff;"
+      >
+        50
+      </span>
+
+      · sin(
+
+      <span
+        class="eq-term"
+        data-term="frequency"
+        style="color:#ff9944;"
+      >
+        0.02
+      </span>
+
+      x + t)
+
+    </div>
+
+
+    <!-- =======================================================
+         MAIN MASCOT
+         ======================================================= -->
+
+    <div
+      class="mascot"
+      id="mascot"
+    >
+
+      <div class="mascot-avatar">
+        🌊
+      </div>
+
+      <div
+        class="mascot-bubble"
+        id="mascotBubble"
+      >
+        Hi! I'm Professor Wave.
+        Try adjusting the sliders below!
+      </div>
+
+    </div>
+
+
+    <!-- =======================================================
+         ELECTROMAGNETIC WAVE LEGEND
+         ======================================================= -->
+
+    <div
+      class="em-legend"
+      id="emLegend"
+    >
+
+      <span style="color:#ff4444;">
+        ■
+      </span>
+
+      Electric Field (E)
+
+      &nbsp;&nbsp;
+
+      <span style="color:#4488ff;">
+        ■
+      </span>
+
+      Magnetic Field (B)
+
+    </div>
+
+
+    <!-- =======================================================
+         2D WAVE CANVAS
+         ======================================================= -->
+
+    <canvas id="waveCanvas"></canvas>
+
+
+    <!-- =======================================================
+         3D WAVE CANVAS
+         ======================================================= -->
+
+    <canvas id="canvas3D"></canvas>
+
+  </section>
+
+
+  <!-- =========================================================
+       CONTROLS
+       ========================================================= -->
+
+  <section class="controls">
+
+    <h2>
+      Controls
+    </h2>
+
+
+    <!-- =======================================================
+         PLAYBACK CONTROLS
+         ======================================================= -->
+
+    <div class="playback-buttons">
+
+      <button
+        id="playPauseBtn"
+        type="button"
+      >
+        Pause
+      </button>
+
+      <button
+        id="resetBtn"
+        type="button"
+      >
+        Reset
+      </button>
+
+      <button
+        id="polarizationBtn"
+        type="button"
+      >
+        Polarization: Linear
+      </button>
+
+    </div>
+
+
+    <!-- =======================================================
+         STRING / 1D WAVE CONTROLS
+         ======================================================= -->
+
+    <div
+      class="string-controls"
+      id="stringControls"
+    >
+
+      <!-- END CONDITION -->
+
+      <div class="btn-group">
+
+        <span class="group-label">
+          End:
+        </span>
+
+        <button
+          type="button"
+          data-end="fixed"
+          class="end-btn active"
+        >
+          🔧 Fixed
+        </button>
+
+        <button
+          type="button"
+          data-end="loose"
+          class="end-btn"
+        >
+          ➰ Loose
+        </button>
+
+        <button
+          type="button"
+          data-end="free"
+          class="end-btn"
+        >
+          🌊 No End
+        </button>
+
+      </div>
+
+
+      <!-- SOURCE -->
+
+      <div class="btn-group">
+
+        <span class="group-label">
+          Source:
+        </span>
+
+        <button
+          type="button"
+          data-source="oscillate"
+          class="source-btn active"
+        >
+          Oscillate
+        </button>
+
+        <button
+          type="button"
+          data-source="pulse"
+          class="source-btn"
+        >
+          Pulse
+        </button>
+
+        <button
+          type="button"
+          data-source="manual"
+          class="source-btn"
+        >
+          ✋ Manual
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- =======================================================
+         SOUND WAVE CONTROLS
+         ======================================================= -->
+
+    <div
+      class="sound-controls"
+      id="soundControls"
+    >
+
+      <button
+        id="playCarBtn"
+        type="button"
+      >
+        ▶️ Play Car Pass-By
+      </button>
+
+      <div
+        class="doppler-readout"
+        id="dopplerReadout"
+      >
+        Heard frequency: 440 Hz
+      </div>
+
+    </div>
+
+
+    <!-- =======================================================
+         RADIO WAVE CONTROLS
+         ======================================================= -->
+
+    <div
+      class="radio-controls"
+      id="radioControls"
+    >
+
+      <div class="btn-group">
+
+        <span class="group-label">
+          Modulation:
+        </span>
+
+        <button
+          type="button"
+          data-modulation="am"
+          class="modulation-btn active"
+        >
+          AM
+        </button>
+
+        <button
+          type="button"
+          data-modulation="fm"
+          class="modulation-btn"
+        >
+          FM
+        </button>
+
+      </div>
+
+      <button
+        id="playRadioBtn"
+        type="button"
+      >
+        🔊 Play Modulated Signal
+      </button>
+
+    </div>
+
+
+    <!-- =======================================================
+         FOURIER WAVE CONTROLS
+         ======================================================= -->
+
+    <div
+      class="fourier-controls"
+      id="fourierControls"
+    >
+
+      <!-- HARMONIC 1 -->
+
+      <div
+        class="harmonic-row"
+        data-harmonic="1"
+      >
+
+        <label>
+
+          <input
+            type="checkbox"
+            class="harmonic-toggle"
+            checked
+          >
+
+          Harmonic 1 (fundamental)
+
+        </label>
+
+        <input
+          type="range"
+          class="harmonic-slider"
+          min="0"
+          max="100"
+          value="80"
+        >
+
+      </div>
+
+
+      <!-- HARMONIC 2 -->
+
+      <div
+        class="harmonic-row"
+        data-harmonic="2"
+      >
+
+        <label>
+
+          <input
+            type="checkbox"
+            class="harmonic-toggle"
+          >
+
+          Harmonic 2
+
+        </label>
+
+        <input
+          type="range"
+          class="harmonic-slider"
+          min="0"
+          max="100"
+          value="0"
+        >
+
+      </div>
+
+
+      <!-- HARMONIC 3 -->
+
+      <div
+        class="harmonic-row"
+        data-harmonic="3"
+      >
+
+        <label>
+
+          <input
+            type="checkbox"
+            class="harmonic-toggle"
+          >
+
+          Harmonic 3
+
+        </label>
+
+        <input
+          type="range"
+          class="harmonic-slider"
+          min="0"
+          max="100"
+          value="0"
+        >
+
+      </div>
+
+
+      <!-- HARMONIC 4 -->
+
+      <div
+        class="harmonic-row"
+        data-harmonic="4"
+      >
+
+        <label>
+
+          <input
+            type="checkbox"
+            class="harmonic-toggle"
+          >
+
+          Harmonic 4
+
+        </label>
+
+        <input
+          type="range"
+          class="harmonic-slider"
+          min="0"
+          max="100"
+          value="0"
+        >
+
+      </div>
+
+
+      <!-- HARMONIC 5 -->
+
+      <div
+        class="harmonic-row"
+        data-harmonic="5"
+      >
+
+        <label>
+
+          <input
+            type="checkbox"
+            class="harmonic-toggle"
+          >
+
+          Harmonic 5
+
+        </label>
+
+        <input
+          type="range"
+          class="harmonic-slider"
+          min="0"
+          max="100"
+          value="0"
+        >
+
+      </div>
+
+
+      <!-- FOURIER PRESETS -->
+
+      <div class="btn-group">
+
+        <button
+          id="squareWavePreset"
+          type="button"
+        >
+          Square Wave Preset
+        </button>
+
+        <button
+          id="sawtoothPreset"
+          type="button"
+        >
+          Sawtooth Preset
+        </button>
+
+        <button
+          id="clearHarmonics"
+          type="button"
+        >
+          Clear All
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- =======================================================
+         AMPLITUDE
+         ======================================================= -->
+
+    <label>
+
+      Amplitude
+
+      <span
+        class="info-icon"
+        data-tooltip="How tall the wave is. Bigger amplitude means the wave carries more energy."
+      >
+        ⓘ
+      </span>
+
+      <span id="amplitudeValue">
+        50
+      </span>
+
+      <input
+        type="range"
+        id="amplitudeSlider"
+        min="10"
+        max="200"
+        value="50"
+        style="accent-color:#00e0ff;"
+      >
+
+    </label>
+
+
+    <!-- =======================================================
+         FREQUENCY
+         ======================================================= -->
+
+    <label>
+
+      Frequency
+
+      <span
+        class="info-icon"
+        data-tooltip="How many wave cycles pass a point each second. Higher frequency means a shorter wavelength."
+      >
+        ⓘ
+      </span>
+
+      <span id="frequencyValue">
+        0.02
+      </span>
+
+      <input
+        type="range"
+        id="frequencySlider"
+        min="0.01"
+        max="0.2"
+        step="0.01"
+        value="0.02"
+        style="accent-color:#ff9944;"
+      >
+
+    </label>
+
+
+    <!-- =======================================================
+         SPEED
+         ======================================================= -->
+
+    <label>
+
+      Speed
+
+      <span
+        class="info-icon"
+        data-tooltip="How fast the wave pattern moves across the screen over time."
+      >
+        ⓘ
+      </span>
+
+      <span id="speedValue">
+        0.05
+      </span>
+
+      <input
+        type="range"
+        id="speedSlider"
+        min="0.01"
+        max="0.3"
+        step="0.01"
+        value="0.05"
+      >
+
+    </label>
+
+
+    <!-- =======================================================
+         CHALLENGE
+         ======================================================= -->
+
+    <div
+      class="challenge-box"
+      id="challengeBox"
+    >
+
+      <strong>
+        🎯 Try This:
+      </strong>
+
+      <span id="challengeText">
+        Set the frequency above 0.15 — what happens to the wavelength?
+      </span>
+
+      <button
+        id="checkChallengeBtn"
+        type="button"
+      >
+        Check
+      </button>
+
+      <div id="challengeFeedback"></div>
+
+    </div>
+
+
+    <!-- =======================================================
+         EXPERIMENT PANEL
+         ======================================================= -->
+
+    <div class="experiment-panel">
+
+      <h2>
+        Experiment
+      </h2>
+
+      <p>
+        Change one variable and observe what happens to the wave.
+      </p>
+
+
+      <div class="experiment-controls">
+
+        <!-- VARIABLE TO CHANGE -->
+
+        <label>
+
+          Change:
+
+          <select id="experimentVariable">
+
+            <option value="amplitude">
+              Amplitude
+            </option>
+
+            <option value="frequency">
+              Frequency
+            </option>
+
+            <option value="wavelength">
+              Wavelength
+            </option>
+
+            <option value="speed">
+              Wave Speed
+            </option>
+
+          </select>
+
+        </label>
+
+
+        <!-- VARIABLE TO HOLD CONSTANT -->
+
+        <label>
+
+          Hold constant:
+
+          <select id="constantVariable">
+
+            <option value="none">
+              Nothing
+            </option>
+
+            <option value="amplitude">
+              Amplitude
+            </option>
+
+            <option value="frequency">
+              Frequency
+            </option>
+
+            <option value="wavelength">
+              Wavelength
+            </option>
+
+            <option value="speed">
+              Wave Speed
+            </option>
+
+          </select>
+
+        </label>
+
+      </div>
+
+
+      <!-- EXPERIMENT MESSAGE -->
+
+      <div id="experimentMessage">
+        Try changing one variable and observe the relationship.
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================================================
+       THREE.JS
+       ========================================================= -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+
+
+  <!-- =========================================================
+       MAIN JAVASCRIPT
+       ========================================================= -->
+
+  <script src="main.js"></script>
+
+</body>
+
+</html>
